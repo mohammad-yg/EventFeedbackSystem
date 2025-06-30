@@ -2,6 +2,7 @@ using EventFeedbackSystem.Application.Auth;
 using EventFeedbackSystem.Application.Shared.Auth;
 using EventFeedbackSystem.Core.Auth.Repositories;
 using EventFeedbackSystem.EntityFrameworkCore.Auth.Repositories;
+using EventFeedbackSystem.EntityFrameworkCore.Events.Repositories;
 using EventFeedbackSystem.EntityFrameworkCore.Shared;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,9 @@ builder.Services.AddSwaggerGen();
 //EntityFramework Core
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+//Events
+builder.Services.AddTransient<IEventsRepository, EventRepository>();
 
 
 //Authentication and Authorization
