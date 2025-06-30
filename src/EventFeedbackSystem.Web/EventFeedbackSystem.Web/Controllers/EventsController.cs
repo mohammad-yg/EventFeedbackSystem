@@ -17,7 +17,7 @@ public class EventsController : ControllerBase
         _eventsService = eventsService;
     }
 
-    [HttpGet]
+    [HttpGet("/")]
     public async Task<IActionResult> GetUpcoming([FromQuery]GetUpcomingListInput input)
     {
         var result = await _eventsService.GetUpcomingList(input);
