@@ -1,0 +1,1 @@
+﻿global using EventFeedbackSystem.Application.Shared.Shared;
