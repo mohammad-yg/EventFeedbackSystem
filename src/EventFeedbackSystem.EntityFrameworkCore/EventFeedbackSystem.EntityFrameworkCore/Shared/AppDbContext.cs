@@ -1,4 +1,5 @@
 ﻿using EventFeedbackSystem.Core.Auth.Entities;
+using EventFeedbackSystem.Core.Events.Entities;
 
 namespace EventFeedbackSystem.EntityFrameworkCore.Shared;
 
@@ -10,6 +11,9 @@ public class AppDbContext : DbContext
 
     //Auth
     public DbSet<User> Users { get; set; }
+
+    //Event
+    public DbSet<Event> Events { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
