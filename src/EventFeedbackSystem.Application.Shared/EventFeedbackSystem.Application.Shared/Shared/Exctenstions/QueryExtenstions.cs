@@ -16,8 +16,4 @@ public static class QueryExtenstions
     {
         return condition ? query.Skip(count) : query;
     }
-    public static async Task<List<T>> ToListAsync<T>(this IQueryable<T> query, CancellationToken cancellationToken = default)
-    {
-        return await query.ToListAsync(cancellationToken);
-    }
 }
