@@ -7,7 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.17" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.17">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\EventFeedbackSystem.Application\EventFeedbackSystem.Application\EventFeedbackSystem.Application.csproj" />
+    <ProjectReference Include="..\..\EventFeedbackSystem.EntityFrameworkCore\EventFeedbackSystem.EntityFrameworkCore\EventFeedbackSystem.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,8 +2,8 @@
 
 public class Entity<TKey> where TKey : struct
 {
-    public required TKey Id { get; set; }
-    public required bool IsDeleted { get; set; } = false;
+    public TKey Id { get; set; }
+    public bool IsDeleted { get; set; } = false;
 
     public void Delete()
     {

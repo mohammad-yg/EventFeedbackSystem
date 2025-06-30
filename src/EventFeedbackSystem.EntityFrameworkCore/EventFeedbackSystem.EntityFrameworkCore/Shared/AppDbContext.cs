@@ -1,10 +1,15 @@
-﻿namespace EventFeedbackSystem.EntityFrameworkCore.Shared;
+﻿using EventFeedbackSystem.Core.Auth.Entities;
+
+namespace EventFeedbackSystem.EntityFrameworkCore.Shared;
 
 public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
     }
+
+    //Auth
+    public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
