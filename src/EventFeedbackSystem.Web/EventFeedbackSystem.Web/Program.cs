@@ -1,5 +1,7 @@
 using EventFeedbackSystem.Application.Auth;
+using EventFeedbackSystem.Application.Events;
 using EventFeedbackSystem.Application.Shared.Auth;
+using EventFeedbackSystem.Application.Shared.Events;
 using EventFeedbackSystem.Core.Auth.Repositories;
 using EventFeedbackSystem.EntityFrameworkCore.Auth.Repositories;
 using EventFeedbackSystem.EntityFrameworkCore.Events.Repositories;
@@ -24,6 +26,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 //Events
 builder.Services.AddTransient<IEventsRepository, EventRepository>();
+builder.Services.AddTransient<IEventsService, EventsService>();
 
 
 //Authentication and Authorization
