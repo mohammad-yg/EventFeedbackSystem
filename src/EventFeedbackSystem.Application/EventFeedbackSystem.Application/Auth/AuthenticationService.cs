@@ -3,6 +3,7 @@ using EventFeedbackSystem.Application.Shared.Auth.Dtos;
 using EventFeedbackSystem.Application.Shared.Shared;
 using EventFeedbackSystem.Core.Auth.Entities;
 using EventFeedbackSystem.Core.Auth.Repositories;
+using EventFeedbackSystem.Core.Shared.Exceptions;
 
 namespace EventFeedbackSystem.Application.Auth;
 
@@ -43,10 +44,12 @@ public class AuthenticationService : IAuthenticationService
             await _usersRepository.AddAsync(user);
             return new ServiceResult(true);
         }
-        catch (Exception ex)
+        catch (InfrastructureException exception)
         {
-            var a = ex.Message;
-            return new ServiceResult(false);
+            if(exception.Message == InfrastructureException.Messages.DuplicateRow)
+                return new ServiceResult(false, "Email already exists");
         }
+
+        throw new Exception();
     }
 }
