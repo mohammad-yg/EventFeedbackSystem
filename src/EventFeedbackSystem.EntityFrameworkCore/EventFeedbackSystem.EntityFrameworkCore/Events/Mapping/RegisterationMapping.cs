@@ -6,6 +6,9 @@ public class RegisterationMapping : IEntityTypeConfiguration<Registeration>
 {
     public void Configure(EntityTypeBuilder<Registeration> builder)
     {
+        //Prevent duplicate records
+        builder.HasIndex(e => new { e.UserId, e.EventId }).IsUnique();
+
         //register-user one-to-many
         builder
             .HasOne(e => e.User)
