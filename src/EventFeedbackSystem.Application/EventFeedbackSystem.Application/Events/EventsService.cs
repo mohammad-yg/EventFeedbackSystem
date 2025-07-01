@@ -6,6 +6,7 @@ using EventFeedbackSystem.Core.Events.Entities;
 using EventFeedbackSystem.Core.Events.Repositories;
 using EventFeedbackSystem.Core.Shared.Exceptions;
 using Mapster;
+using Microsoft.EntityFrameworkCore;
 
 namespace EventFeedbackSystem.Application.Events;
 
@@ -30,15 +31,23 @@ public class EventsService : IEventsService
         return new ServiceResult<EventDetailOutput>(true, eventDetail.Adapt<EventDetailOutput>());
     }
 
-    public Task<ServiceResult<IEnumerable<EventListOutput>>> GetUpcomingList(GetUpcomingListInput input)
+    public async Task<ServiceResult<IEnumerable<EventListOutput>>> GetUpcomingList(GetUpcomingListInput input)
     {
         try
         {
-            var events = _eventsRepository
+            var events = await _eventsRepository
                 .GetAll()
                 .Where(e => e.DateTime > DateTime.UtcNow)
                 .ProjectToType<EventListOutput>()
-                .ToList();
+                .ToListAsync();
+
+            return new ServiceResult<IEnumerable<EventListOutput>>(true, events);
+        }
+        catch
+        {
+            return new ServiceResult<IEnumerable<EventListOutput>>(false, null, "Error retrieving events");
+        }
+    }
 
     public async Task<ServiceResult<IEnumerable<EventListOutput>>> GetUserRegisterationsList(long userId)
     {
