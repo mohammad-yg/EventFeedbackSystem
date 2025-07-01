@@ -3,6 +3,7 @@ using EventFeedbackSystem.Application.Events;
 using EventFeedbackSystem.Application.Shared.Auth;
 using EventFeedbackSystem.Application.Shared.Events;
 using EventFeedbackSystem.Core.Auth.Repositories;
+using EventFeedbackSystem.Core.Events.Repositories;
 using EventFeedbackSystem.EntityFrameworkCore.Auth.Repositories;
 using EventFeedbackSystem.EntityFrameworkCore.Events.Repositories;
 using EventFeedbackSystem.EntityFrameworkCore.Shared;
@@ -55,6 +56,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 //Events
 builder.Services.AddTransient<IEventsRepository, EventRepository>();
+builder.Services.AddTransient<IRegisterationRepository, RegisterationRepository>();
 builder.Services.AddTransient<IEventsService, EventsService>();
 
 
