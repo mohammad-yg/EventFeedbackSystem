@@ -5,15 +5,15 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9449E4D8-FAA0-426B-B531-1E022BA6E366}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventFeedbackSystem.Web", ".\src\EventFeedbackSystem.Web\EventFeedbackSystem.Web\EventFeedbackSystem.Web.csproj", "{A3DC14CB-1D80-4AD8-A9E6-74F30CD35B95}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventFeedbackSystem.Web", ".\src\EventFeedbackSystem.Web\EventFeedbackSystem.Web.csproj", "{A3DC14CB-1D80-4AD8-A9E6-74F30CD35B95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventFeedbackSystem.Core", ".\src\EventFeedbackSystem.Core\EventFeedbackSystem.Core\EventFeedbackSystem.Core.csproj", "{EE6A7B30-5CFA-4E70-BA25-7DF6242FAC78}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventFeedbackSystem.Core", ".\src\EventFeedbackSystem.Core\EventFeedbackSystem.Core.csproj", "{EE6A7B30-5CFA-4E70-BA25-7DF6242FAC78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventFeedbackSystem.Application", ".\src\EventFeedbackSystem.Application\EventFeedbackSystem.Application\EventFeedbackSystem.Application.csproj", "{021EBC9F-0368-49C6-BBE9-B807DAFAC4D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventFeedbackSystem.Application", ".\src\EventFeedbackSystem.Application\EventFeedbackSystem.Application.csproj", "{021EBC9F-0368-49C6-BBE9-B807DAFAC4D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventFeedbackSystem.EntityFrameworkCore", ".\src\EventFeedbackSystem.EntityFrameworkCore\EventFeedbackSystem.EntityFrameworkCore\EventFeedbackSystem.EntityFrameworkCore.csproj", "{85B8C2E9-49D9-4211-856A-0C0C1B1DC6E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventFeedbackSystem.EntityFrameworkCore", ".\src\EventFeedbackSystem.EntityFrameworkCore\EventFeedbackSystem.EntityFrameworkCore.csproj", "{85B8C2E9-49D9-4211-856A-0C0C1B1DC6E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventFeedbackSystem.Application.Shared", ".\src\EventFeedbackSystem.Application.Shared\EventFeedbackSystem.Application.Shared\EventFeedbackSystem.Application.Shared.csproj", "{4AA0A51B-3364-4A5C-BEC1-3883A55CB58C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventFeedbackSystem.Application.Shared", ".\src\EventFeedbackSystem.Application.Shared\EventFeedbackSystem.Application.Shared.csproj", "{4AA0A51B-3364-4A5C-BEC1-3883A55CB58C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\EventFeedbackSystem.Application.Shared\EventFeedbackSystem.Application.Shared\EventFeedbackSystem.Application.Shared.csproj" />
-    <ProjectReference Include="..\..\EventFeedbackSystem.Core\EventFeedbackSystem.Core\EventFeedbackSystem.Core.csproj" />
+    <ProjectReference Include="..\EventFeedbackSystem.Application.Shared\EventFeedbackSystem.Application.Shared.csproj" />
+    <ProjectReference Include="..\EventFeedbackSystem.Core\EventFeedbackSystem.Core.csproj" />
   </ItemGroup>
 
 </Project>

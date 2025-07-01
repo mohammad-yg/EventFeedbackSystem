@@ -19,8 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\EventFeedbackSystem.Application\EventFeedbackSystem.Application\EventFeedbackSystem.Application.csproj" />
-    <ProjectReference Include="..\..\EventFeedbackSystem.EntityFrameworkCore\EventFeedbackSystem.EntityFrameworkCore\EventFeedbackSystem.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\EventFeedbackSystem.Application.Shared\EventFeedbackSystem.Application.Shared.csproj" />
+    <ProjectReference Include="..\EventFeedbackSystem.Application\EventFeedbackSystem.Application.csproj" />
+    <ProjectReference Include="..\EventFeedbackSystem.Core\EventFeedbackSystem.Core.csproj" />
+    <ProjectReference Include="..\EventFeedbackSystem.EntityFrameworkCore\EventFeedbackSystem.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
 </Project>
