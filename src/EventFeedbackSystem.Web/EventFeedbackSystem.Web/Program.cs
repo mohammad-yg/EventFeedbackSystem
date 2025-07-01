@@ -59,6 +59,7 @@ builder.Services.AddTransient<IEventsRepository, EventRepository>();
 builder.Services.AddTransient<IRegisterationRepository, RegisterationRepository>();
 builder.Services.AddTransient<IFeedbackRepository, FeedbackRepository>();
 builder.Services.AddTransient<IEventsService, EventsService>();
+builder.Services.AddTransient<IFeedbackService, FeedbackService>();
 
 //Authentication and Authorization
 builder.Services.AddTransient<IUsersRepository,UsersRepository>();
