@@ -19,14 +19,14 @@ public class FeedbackService : IFeedbackService
         _registerationRepository = registerationRepository;
     }
 
-    public async Task<ServiceResult> AddFeedbackAsync(long userId, long eventId, AddFeedbackInput input)
+    public async Task<ServiceResult> AddFeedbackAsync(long userId, AddFeedbackInput input)
     {
-        var feedback = new Feedback(userId, eventId, input.Rating, input.Comment);
+        var feedback = new Feedback(userId, input.EventId, input.Rating, input.Comment);
 
         //continue if the user is registered for the event
         var registed = await _registerationRepository
             .GetAll()
-            .AnyAsync(r => r.UserId == userId && r.EventId == eventId);
+            .AnyAsync(r => r.UserId == userId && r.EventId == input.EventId);
         if (!registed)
             return new ServiceResult(false, "User is not registered for this event.");
 

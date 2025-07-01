@@ -15,12 +15,12 @@ public class FeedbackController : BaseController
     }
 
     [HttpPost]
-    [ActionName("{eventId}")]
+    [ActionName("")]
     [Authorize]
-    public async Task<IActionResult> Submit([FromRoute] long eventId, [FromBody] AddFeedbackInput input)
+    public async Task<IActionResult> Submit([FromBody] AddFeedbackInput input)
     {
         var userId = GetCurrentUserId();
-        var result = await _feedbackService.AddFeedbackAsync(userId, eventId, input);
+        var result = await _feedbackService.AddFeedbackAsync(userId, input);
 
         if (result.IsSuccess)
             return Ok(result);
