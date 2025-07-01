@@ -5,4 +5,5 @@ namespace EventFeedbackSystem.Core.Events.Repositories;
 
 public interface IRegisterationRepository : IRepository<Registeration, long>
 {
+    IQueryable<Event> GetUserRegisterdEvents(long userId);
 }

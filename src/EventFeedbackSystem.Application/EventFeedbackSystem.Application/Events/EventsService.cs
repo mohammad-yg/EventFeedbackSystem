@@ -40,11 +40,20 @@ public class EventsService : IEventsService
                 .ProjectToType<EventListOutput>()
                 .ToList();
 
-            return Task.FromResult(new ServiceResult<IEnumerable<EventListOutput>>(true, events));
+    public async Task<ServiceResult<IEnumerable<EventListOutput>>> GetUserRegisterationsList(long userId)
+    {
+        try
+        {
+            var events = await _registerationRepository
+                .GetUserRegisterdEvents(userId)
+                .ProjectToType<EventListOutput>()
+                .ToListAsync();
+
+            return new ServiceResult<IEnumerable<EventListOutput>>(true, events);
         }
         catch
         {
-            return Task.FromResult(new ServiceResult<IEnumerable<EventListOutput>>(false, null, "Error retrieving events"));
+            return new ServiceResult<IEnumerable<EventListOutput>>(false, null, "Error retrieving events");
         }
     }
 
