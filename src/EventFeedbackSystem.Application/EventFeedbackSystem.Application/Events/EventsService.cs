@@ -17,16 +17,12 @@ public class EventsService : IEventsService
 
     public async Task<ServiceResult<EventDetailOutput>> GetEvent(long Id)
     {
-        try
-        {
-            var eventDetail = await _eventsRepository.GetAsync(Id);
-            var eventDetailOutput = eventDetail.Adapt<EventDetailOutput>();
-            return new ServiceResult<EventDetailOutput>(true, eventDetailOutput);
-        }
-        catch
-        {
-            return new ServiceResult<EventDetailOutput>(false, null, "Event not found");
-        }
+        var eventDetail = await _eventsRepository.GetAsync(Id);
+
+        if (eventDetail is null)
+            return new ServiceResult<EventDetailOutput>(false, null, "NotFound");
+
+        return new ServiceResult<EventDetailOutput>(true, eventDetail.Adapt<EventDetailOutput>());
     }
 
     public Task<ServiceResult<IEnumerable<EventListOutput>>> GetUpcomingList(GetUpcomingListInput input)
