@@ -7,7 +7,7 @@ public class FeedbackMapping : IEntityTypeConfiguration<Feedback>
     public void Configure(EntityTypeBuilder<Feedback> builder)
     {
         //index
-        builder.HasIndex(e => new { e.EventId, e.UserId });
+        builder.HasIndex(e => new { e.EventId, e.UserId }).IsUnique();
 
         //user one-to-many
         builder
