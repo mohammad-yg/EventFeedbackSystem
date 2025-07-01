@@ -1,4 +1,7 @@
-﻿namespace EventFeedbackSystem.EntityFrameworkCore;
+﻿using EventFeedbackSystem.Core.Shared.Exceptions;
+using Npgsql;
+
+namespace EventFeedbackSystem.EntityFrameworkCore;
 
 public class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TKey : struct where TEntity : Entity<TKey>
 {
@@ -37,15 +40,47 @@ public class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TKey :
 
     public virtual void Add(TEntity entity, bool saveChanges = true)
     {
-        _context.Add(entity);
-        if (saveChanges)
-            _context.SaveChanges();
+        try
+        {
+            _context.Add(entity);
+            if (saveChanges)
+                _context.SaveChanges();
+        }
+        catch (DbUpdateException ex) when (ex.InnerException is PostgresException pgEx)
+        {
+            throw pgEx.SqlState switch
+            {
+                PostgresErrorCodes.UniqueViolation =>
+                    new InfrastructureException(InfrastructureException.Messages.DuplicateRow),
+
+                PostgresErrorCodes.ForeignKeyViolation =>
+                    new InfrastructureException(InfrastructureException.Messages.InvalidForeignKey),
+
+                _ => new InfrastructureException("Unknown", ex)
+            };
+        }
     }
     public virtual async Task AddAsync(TEntity entity, bool saveChanges = true)
     {
-        await _context.AddAsync(entity);
-        if (saveChanges)
-            await _context.SaveChangesAsync();
+        try
+        {
+            await _context.AddAsync(entity);
+            if (saveChanges)
+                await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateException ex) when (ex.InnerException is PostgresException pgEx)
+        {
+            throw pgEx.SqlState switch
+            {
+                PostgresErrorCodes.UniqueViolation =>
+                    new InfrastructureException(InfrastructureException.Messages.DuplicateRow),
+
+                PostgresErrorCodes.ForeignKeyViolation =>
+                    new InfrastructureException(InfrastructureException.Messages.InvalidForeignKey),
+
+                _ => new InfrastructureException("Unknown", ex)
+            };
+        }
     }
     public void AddRange(IEnumerable<TEntity> entities, bool saveChanges = true)
     {
