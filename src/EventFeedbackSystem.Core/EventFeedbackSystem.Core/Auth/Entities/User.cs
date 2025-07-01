@@ -9,6 +9,7 @@ public class User : Entity<long>
     public string PasswordHash { get; set; }
 
     public IEnumerable<Registeration> Registerations { get; set; }
+    public IEnumerable<Feedback> Feedbacks { get; set; }
 
     public User(string email, string hashPasswords)
     {

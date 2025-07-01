@@ -15,6 +15,7 @@ public class AppDbContext : DbContext
     //Event
     public DbSet<Event> Events { get; set; }
     public DbSet<Registeration> Registerations { get; set; }
+    public DbSet<Feedback> Feedbacks { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

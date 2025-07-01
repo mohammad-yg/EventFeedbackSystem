@@ -8,6 +8,7 @@ public class Event : Entity<long>
     public string Location { get; set; }
 
     public IEnumerable<Registeration> Registerations { get; set; }
+    public IEnumerable<Feedback> Feedbacks { get; set; }
 
     public Event(string title, string description, DateTime dateTime, string location)
     {
