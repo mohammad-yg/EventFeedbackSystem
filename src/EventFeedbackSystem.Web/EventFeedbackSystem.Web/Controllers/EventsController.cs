@@ -1,6 +1,8 @@
 using EventFeedbackSystem.Application.Shared.Events;
 using EventFeedbackSystem.Application.Shared.Events.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace EventFeedbackSystem.Web.Controllers;
 
@@ -39,6 +41,21 @@ public class EventsController : ControllerBase
 
         if (result.ErrorKey == "NotFound")
             return NotFound(result);
+
+        return BadRequest(result);
+    }
+
+    [HttpGet]
+    [ActionName("{eventId}/register")]
+    [Authorize]
+    public async Task<IActionResult> Register([FromRoute]long eventId)
+    {
+        var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+        var userId = Int64.Parse(userIdString);
+
+        var result = await _eventsService.Register(userId, eventId);
+        if (result.IsSuccess)
+            return Ok(result);
 
         return BadRequest(result);
     }

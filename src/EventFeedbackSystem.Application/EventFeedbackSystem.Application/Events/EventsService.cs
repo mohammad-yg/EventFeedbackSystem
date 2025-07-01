@@ -2,6 +2,9 @@
 using EventFeedbackSystem.Application.Shared.Events.Dtos;
 using EventFeedbackSystem.Application.Shared.Shared;
 using EventFeedbackSystem.Core.Auth.Repositories;
+using EventFeedbackSystem.Core.Events.Entities;
+using EventFeedbackSystem.Core.Events.Repositories;
+using EventFeedbackSystem.Core.Shared.Exceptions;
 using Mapster;
 
 namespace EventFeedbackSystem.Application.Events;
@@ -9,10 +12,12 @@ namespace EventFeedbackSystem.Application.Events;
 public class EventsService : IEventsService
 {
     private readonly IEventsRepository _eventsRepository;
+    private readonly IRegisterationRepository _registerationRepository;
 
-    public EventsService(IEventsRepository eventsRepository)
+    public EventsService(IEventsRepository eventsRepository, IRegisterationRepository registerationRepository)
     {
         _eventsRepository = eventsRepository;
+        _registerationRepository = registerationRepository;
     }
 
     public async Task<ServiceResult<EventDetailOutput>> GetEvent(long Id)
@@ -40,6 +45,32 @@ public class EventsService : IEventsService
         catch
         {
             return Task.FromResult(new ServiceResult<IEnumerable<EventListOutput>>(false, null, "Error retrieving events"));
+        }
+    }
+
+    public async Task<ServiceResult> Register(long userId, long evnetId)
+    {
+        try
+        {
+            await _registerationRepository.AddAsync(new Registeration()
+            {
+                UserId = userId,
+                EventId = evnetId
+            });
+            return new ServiceResult(true);
+        }
+        catch (InfrastructureException ex)
+        {
+            switch (ex.Message)
+            {
+                case InfrastructureException.Messages.InvalidForeignKey:
+                    return new ServiceResult(false, "event not found");
+
+                case InfrastructureException.Messages.DuplicateRow:
+                    return new ServiceResult(false, "duplicate registeration");
+            }
+
+            return new ServiceResult(false);
         }
     }
 }
