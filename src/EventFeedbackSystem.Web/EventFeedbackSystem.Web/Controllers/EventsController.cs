@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using EventFeedbackSystem.Application.Shared.Events;
 using EventFeedbackSystem.Application.Shared.Events.Dtos;
 using Microsoft.AspNetCore.Authorization;
@@ -6,9 +7,7 @@ using System.Security.Claims;
 
 namespace EventFeedbackSystem.Web.Controllers;
 
-[ApiController]
-[Route("[controller]/[action]")]
-public class EventsController : ControllerBase
+public class EventsController : BaseController
 {
     private readonly IEventsService _eventsService;
 
@@ -48,7 +47,7 @@ public class EventsController : ControllerBase
     [HttpGet]
     [ActionName("{eventId}/register")]
     [Authorize]
-    public async Task<IActionResult> Register([FromRoute]long eventId)
+    public async Task<IActionResult> Register([FromRoute] long eventId)
     {
         var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
         var userId = Int64.Parse(userIdString);

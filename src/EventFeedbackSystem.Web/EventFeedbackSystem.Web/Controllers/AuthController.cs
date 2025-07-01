@@ -4,9 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EventFeedbackSystem.Web.Controllers;
 
-[ApiController]
-[Route("[controller]/[action]")]
-public class AuthController : ControllerBase
+public class AuthController : BaseController
 {
     private readonly IAuthenticationService _authenticationService;
 
@@ -16,7 +14,8 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Login(UserLoginInput input)
+    [ActionName("login")]
+    public async Task<IActionResult> Login([FromBody] UserLoginInput input)
     {
         var result = await _authenticationService.LoginAsync(input);
 
@@ -25,11 +24,12 @@ public class AuthController : ControllerBase
             return BadRequest(result);
         }
 
-        return Ok(result.Data); 
+        return Ok(result.Data);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Register(UserRegisterInput input)
+    [ActionName("register")]
+    public async Task<IActionResult> Register([FromBody] UserRegisterInput input)
     {
         var result = await _authenticationService.RegisterAsyn(input);
 
