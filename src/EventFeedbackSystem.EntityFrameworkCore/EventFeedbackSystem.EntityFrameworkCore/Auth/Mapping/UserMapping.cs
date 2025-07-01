@@ -6,6 +6,8 @@ public class UserMapping : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
+        builder.HasIndex(e => e.Email).IsUnique();
+
         //Email
         builder.Property(e => e.Email).IsRequired().HasMaxLength(256);
 
