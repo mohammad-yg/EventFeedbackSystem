@@ -1,4 +1,3 @@
-using Asp.Versioning;
 using EventFeedbackSystem.Application.Shared.Events;
 using EventFeedbackSystem.Application.Shared.Events.Dtos;
 using Microsoft.AspNetCore.Authorization;
@@ -49,8 +48,7 @@ public class EventsController : BaseController
     [Authorize]
     public async Task<IActionResult> Register([FromRoute] long eventId)
     {
-        var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
-        var userId = Int64.Parse(userIdString);
+        var userId = GetCurrentUserId();
 
         var result = await _eventsService.Register(userId, eventId);
         if (result.IsSuccess)
