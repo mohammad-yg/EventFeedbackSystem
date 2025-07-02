@@ -43,7 +43,7 @@ public class EventsController : BaseController
         return BadRequest(result);
     }
 
-    [HttpGet]
+    [HttpPost]
     [ActionName("{eventId}/register")]
     [Authorize]
     public async Task<IActionResult> Register([FromRoute] long eventId)
