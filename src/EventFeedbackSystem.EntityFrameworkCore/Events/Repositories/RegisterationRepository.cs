@@ -11,7 +11,7 @@ public class RegisterationRepository : Repository<Registeration, long>, IRegiste
         _context = context;
     }
 
-    public IQueryable<Event> GetUserRegisterdEvents(long userId)
+    public IQueryable<Event> GetUserRegisteredEvents(long userId)
     {
         return
             _context

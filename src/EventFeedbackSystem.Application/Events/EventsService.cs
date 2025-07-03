@@ -54,7 +54,7 @@ public class EventsService : IEventsService
         try
         {
             var events = await _registerationRepository
-                .GetUserRegisterdEvents(userId)
+                .GetUserRegisteredEvents(userId)
                 .ProjectToType<EventListOutput>()
                 .ToListAsync();
 

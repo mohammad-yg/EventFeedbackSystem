@@ -24,7 +24,7 @@ public class DashboardController : BaseController
 
         if (result.IsSuccess) return Ok(new DashboardIndexViewModel()
         {
-            RegisterdEvents = result.Data
+            RegisteredEvents = result.Data
         });
 
         return BadRequest(result);

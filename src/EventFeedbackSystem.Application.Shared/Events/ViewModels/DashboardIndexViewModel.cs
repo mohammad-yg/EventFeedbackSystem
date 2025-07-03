@@ -4,5 +4,5 @@ namespace EventFeedbackSystem.Application.Shared.Events.ViewModels;
 
 public class DashboardIndexViewModel
 {
-    public IEnumerable<EventListOutput> RegisterdEvents { get; set; }
+    public IEnumerable<EventListOutput> RegisteredEvents { get; set; }
 }
