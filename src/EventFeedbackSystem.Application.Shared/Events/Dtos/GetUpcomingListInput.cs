@@ -1,5 +1,5 @@
 ﻿namespace EventFeedbackSystem.Application.Shared.Events.Dtos;
 
-public class GetUpcomingListInput : PaginationInput
+public class GetUpcomingListInput
 {
 }
