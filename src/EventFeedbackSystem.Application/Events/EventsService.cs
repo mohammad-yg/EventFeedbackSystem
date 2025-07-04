@@ -82,10 +82,10 @@ public class EventsService : IEventsService
             switch (ex.Message)
             {
                 case InfrastructureException.Messages.InvalidForeignKey:
-                    return new ServiceResult(false, "event not found");
+                    return new ServiceResult(false, "EntityNotFound");
 
                 case InfrastructureException.Messages.DuplicateRow:
-                    return new ServiceResult(false, "duplicate registeration");
+                    return new ServiceResult(false, "DuplicateRegistration");
             }
 
             return new ServiceResult(false);
