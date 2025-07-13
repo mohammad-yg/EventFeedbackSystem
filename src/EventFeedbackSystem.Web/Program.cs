@@ -16,8 +16,10 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// receive configuration from appsettings.json and environment variables
+builder.Configuration.AddEnvironmentVariables();
 
+// Add services to the container.
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -114,8 +116,8 @@ using (var scope = app.Services.CreateScope())
         if (context.Events.AsNoTracking().Count() == 0)
         {
             context.Events.Add(new Event("Event 1", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", DateTime.UtcNow - TimeSpan.FromDays(1), "Tehran"));
-            context.Events.Add(new Event("Event 2", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", DateTime.UtcNow + TimeSpan.FromDays(1), "Tehran"));
-            context.Events.Add(new Event("Event 3", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", DateTime.UtcNow + TimeSpan.FromDays(2), "Tehran"));
+            context.Events.Add(new Event("Event 2", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", DateTime.UtcNow, "Tehran"));
+            context.Events.Add(new Event("Event 3", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", DateTime.UtcNow + TimeSpan.FromDays(2) + TimeSpan.FromDays(2), "Tehran"));
             context.Events.Add(new Event("Event 4", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", DateTime.UtcNow + TimeSpan.FromDays(3), "Tehran"));
             context.Events.Add(new Event("Event 5", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", DateTime.UtcNow + TimeSpan.FromDays(4), "Tehran"));
             context.SaveChanges();
