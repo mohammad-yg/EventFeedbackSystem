@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=event_feedback_system_db;Username=sa;Password=123qwe
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: sa
+      POSTGRES_PASSWORD: 123qwe
+      POSTGRES_DB: event_feedback_system_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
