@@ -3,6 +3,7 @@ using EventFeedbackSystem.Application.Events;
 using EventFeedbackSystem.Application.Shared.Auth;
 using EventFeedbackSystem.Application.Shared.Events;
 using EventFeedbackSystem.Core.Auth.Repositories;
+using EventFeedbackSystem.Core.Events.Entities;
 using EventFeedbackSystem.Core.Events.Repositories;
 using EventFeedbackSystem.EntityFrameworkCore.Auth.Repositories;
 using EventFeedbackSystem.EntityFrameworkCore.Events.Repositories;
@@ -62,7 +63,7 @@ builder.Services.AddTransient<IEventsService, EventsService>();
 builder.Services.AddTransient<IFeedbackService, FeedbackService>();
 
 //Authentication and Authorization
-builder.Services.AddTransient<IUsersRepository,UsersRepository>();
+builder.Services.AddTransient<IUsersRepository, UsersRepository>();
 builder.Services.AddTransient<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
@@ -98,5 +99,34 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<AppDbContext>();
+        var logger = services.GetRequiredService<ILogger<Program>>();
+
+        await context.Database.MigrateAsync();
+        logger.LogInformation("Migrations applied successfully");
+
+        if (context.Events.AsNoTracking().Count() == 0)
+        {
+            context.Events.Add(new Event("Event 1", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", DateTime.UtcNow - TimeSpan.FromDays(1), "Tehran"));
+            context.Events.Add(new Event("Event 2", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", DateTime.UtcNow + TimeSpan.FromDays(1), "Tehran"));
+            context.Events.Add(new Event("Event 3", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", DateTime.UtcNow + TimeSpan.FromDays(2), "Tehran"));
+            context.Events.Add(new Event("Event 4", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", DateTime.UtcNow + TimeSpan.FromDays(3), "Tehran"));
+            context.Events.Add(new Event("Event 5", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", DateTime.UtcNow + TimeSpan.FromDays(4), "Tehran"));
+            context.SaveChanges();
+        }
+
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while migrating the database.");
+    }
+}
 
 app.Run();
