@@ -22,13 +22,20 @@ public class FeedbackService : IFeedbackService
     public async Task<ServiceResult> AddFeedbackAsync(long userId, AddFeedbackInput input)
     {
         var feedback = new Feedback(userId, input.EventId, input.Rating, input.Comment);
+        var _event = await _registerationRepository
+            .GetAll()
+            .Where(r => r.UserId == userId && r.EventId == input.EventId)
+            .Include(e => e.Event)
+            .Select(r => r.Event)
+            .FirstOrDefaultAsync();
 
         //continue if the user is registered for the event
-        var registed = await _registerationRepository
-            .GetAll()
-            .AnyAsync(r => r.UserId == userId && r.EventId == input.EventId);
-        if (!registed)
+        if (_event == null)
             return new ServiceResult(false, "User is not registered for this event.");
+
+        //continue if the event is finished
+        if (_event.DateTime > DateTime.UtcNow)
+            return new ServiceResult(false, "EventIsNotFinished", "Event is not finished yet.");
 
         try
         {
