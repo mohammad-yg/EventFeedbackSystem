@@ -1,4 +1,4 @@
-using EventFeedbackSystem.Application.Auth;
+﻿using EventFeedbackSystem.Application.Auth;
 using EventFeedbackSystem.Application.Events;
 using EventFeedbackSystem.Application.Shared.Auth;
 using EventFeedbackSystem.Application.Shared.Events;
@@ -82,17 +82,17 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+//if (app.Environment.IsDevelopment())
+//{
+app.UseSwagger();
+app.UseSwaggerUI();
+app.UseCors(oprions =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-    app.UseCors(oprions =>
-    {
-        oprions.AllowAnyOrigin();
-        oprions.AllowAnyHeader();
-        oprions.AllowAnyMethod();
-    });
-}
+    oprions.AllowAnyOrigin();
+    oprions.AllowAnyHeader();
+    oprions.AllowAnyMethod();
+});
+//}
 
 app.UseHttpsRedirection();
 
