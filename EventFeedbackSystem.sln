@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventFeedbackSystem.EntityF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventFeedbackSystem.Application.Shared", "src\EventFeedbackSystem.Application.Shared\EventFeedbackSystem.Application.Shared.csproj", "{4AA0A51B-3364-4A5C-BEC1-3883A55CB58C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{28289FD3-6006-40D9-8C00-D5C4EB88A325}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CC3CB3CA-4D51-427F-A9BA-AB823830BA4A}"
 	ProjectSection(SolutionItems) = preProject
 		Dockerfile = Dockerfile
 	EndProjectSection
