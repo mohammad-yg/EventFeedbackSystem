@@ -70,11 +70,7 @@ public class EventsService : IEventsService
     {
         try
         {
-            await _registerationRepository.AddAsync(new Registeration()
-            {
-                UserId = userId,
-                EventId = evnetId
-            });
+            await _registerationRepository.AddAsync(new Registeration(userId, evnetId));
             return new ServiceResult(true);
         }
         catch (InfrastructureException ex)

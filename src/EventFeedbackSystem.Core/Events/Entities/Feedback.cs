@@ -16,10 +16,7 @@ public class Feedback : Entity<long>
     public string Comment { get; set; }
 
 
-    //For Add Migration (ef tools)
-    public Feedback()
-    {
-    }
+    private Feedback(){}
 
     public Feedback(long userId, long eventId, int rating, string comment)
     {

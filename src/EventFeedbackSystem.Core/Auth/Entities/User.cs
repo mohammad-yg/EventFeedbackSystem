@@ -11,14 +11,10 @@ public class User : Entity<long>
     public IEnumerable<Registeration> Registerations { get; set; }
     public IEnumerable<Feedback> Feedbacks { get; set; }
 
+    private User() { }
     public User(string email, string hashPasswords)
     {
         Email = email;
         PasswordHash = hashPasswords;   
-    }
-
-    //for add migrantion
-    public User()
-    {
     }
 }

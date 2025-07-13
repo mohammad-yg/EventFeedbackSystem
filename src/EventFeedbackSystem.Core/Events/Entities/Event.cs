@@ -10,6 +10,9 @@ public class Event : Entity<long>
     public IEnumerable<Registeration> Registerations { get; set; }
     public IEnumerable<Feedback> Feedbacks { get; set; }
 
+    private Event()
+    {
+    }
     public Event(string title, string description, DateTime dateTime, string location)
     {
         Title = title;
@@ -18,8 +21,4 @@ public class Event : Entity<long>
         Location = location;
     }
 
-    //for add migration
-    public Event()
-    {
-    }
 }
